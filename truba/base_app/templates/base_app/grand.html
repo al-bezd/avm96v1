@@ -1,0 +1,232 @@
+{% extends "base_app/base.html" %}
+ 
+<!--GRAND-->
+{% block grand %}
+{% load staticfiles %}
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+<link  href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
+<span id="templname" style="display:none;">grand</span>
+
+<div class="fotorama row column text-center" data-autoplay="5000" data-transition="crossfade" data-hash="true" data-arrows="false"
+     data-click="false"
+     data-swipe="false" data-nav="false">
+  <!--<img src="{% static "img/t1.jpg" %}" style="max-height: 506px;">
+  <img src="{% static "img/t2.jpg" %}" style="max-height: 506px;">
+  <img src="{% static "img/t3.jpg" %}" style="max-height: 506px;">-->
+	{% if grand_page %}
+  {%for i in grand_page%}
+	  {% if i.img %}
+	    <img alt="http://placehold.it/1000x500" src="{{i.img.url}}" style="max-height: 506px;"">
+	    {%else%}
+	    <img class="thumbnail" src="http://placehold.it/1000x500" style="max-height: 506px;">
+		{% endif %}
+  {%endfor%}
+	{%else%}
+	<h1 class="text-center">Пока пусто</h1>
+	{%endif%}
+</div>
+
+<br>
+<div class="row column text-center">
+<div class="callout text-center" style='background-image: url( {% static "img/mettal_ist1.png" %} ) !important; opacity: 0.8;'>
+	<h2 class="title-block">Наша продукция</h2>
+</div>
+
+</div>
+<div class="row small-up-2 large-up-4"><!--<div class="row small-up-2 large-up-4">-->
+	{% if catalog %}
+{% for i in catalog%}
+{% if i.parent_alias == 'none' %}
+
+<div class="column text-center">
+	<a href="/c={{i.alias}}/">
+		{% if i.img %}
+	    <img class="thumbnail thumbnail-img" alt="http://placehold.it/300x300" src="{{i.img.url}}" style="height:300px;width:300px;">
+	    {%else%}
+	    <img class="thumbnail thumbnail-img" src="http://placehold.it/300x300" style="height:300px;width:300px;">
+		{% endif %}
+
+	<h1 class="catalog_name" style="text-transform:uppercase;font-family:Exo_Semi_Bold;">{{i.name}}</h1>
+	</a>
+<!--<a href="http://foundation.zurb.com/templates-previews-sites-f6/ecommerce.html#" class="button expanded">Buy</a>-->
+</div>
+
+{%endif%}
+{%endfor%}
+	{%else%}
+	<h1 class="text-center">пока пусто</h1>
+	{%endif%}
+</div>
+
+
+		<div class="medium-12 row columns text-center" style="margin-top:50px;margin-bottom:50px;font-family:Exo_Semi_Bold;">
+			<div class="row">
+				<div class="medium-3 columns">
+					<img src='{% static "img/1.png" %}' alt="" class="format-img"><br>
+					<strong><span class="format1">Высокое качество</span></strong><br><br>
+					<span class="format2">Мы заботимся о наших клиентах и гарантируем лучшее качество.</span>
+				</div>
+				<div class="medium-3 columns">
+					<img src='{% static "img/2.png" %}' alt="" class="format-img"><br>
+					<strong><span class="format1">Низкая цена</span></strong><br><br>
+					<span class="format2">Мы всегда готовы предложить своим клиентам одни из лучших цен.</span>
+				</div>
+				<div class="medium-3 columns">
+					<img src='{% static "img/3.png" %}' alt="" class="format-img"><br>
+					<strong><span class="format1">Минимальные сроки</span></strong><br><br>
+					<span class="format2">Постоянно работаем над увеличением скорости выполнения заказов.</span>
+				</div>
+				<div class="medium-3 columns">
+					<img src='{% static "img/4.png" %}' alt="" class="format-img"><br>
+					<strong><span class="format1">Скидки постоянным клиентам</span></strong><br><br>
+					<span class="format2">Приготовим для Вас индивидуальное предложение!</span>
+				</div>
+			</div>
+		</div>
+		
+<div class="row column text-center">
+{% if recomended %}
+<div class="row">
+	<div class="callout text-center" style='background-image: url( {% static "img/mettal_ist1.png" %} ) !important; opacity: 0.8;margin-left: 15px;margin-right: 15px;'>
+		<h2 class="title-block">Часто заказываемые</h2>
+	</div>
+		<!--
+				{% for i in block_info %}
+			<div class="column info_block_id" style="padding:1px;width:50%;height:80px;margin-top: 1px;margin-bottom: 1px;">
+				<button class="button large expanded" style="margin-bottom: 1px;height:80px;" data-open="Modal_{{i.alias}}" id="m-{{i.alias}}">
+				<span style="font-size:30px;"><i class="{{i.icon}}" style="padding-right:10px;padding-left:10px;"></i>{{i.title}}</span>
+				</button>
+			</div>
+		{% endfor %}
+		-->
+
+		<div class="" style="font-size:20px; margin-bottom:1px;padding-left: 0.0px;padding-right: 0.0px;margin-left:15px;margin-right:15px;" id="">
+
+		{% for i in recomended %}
+			<a href="/p={{i.alias}}"><div class="info_block_id column" style="padding:1px;width:50%;margin-top: 1px;margin-bottom: px;">
+						
+			<div class="media-object thumbnail expanded card_class text-left" style='width:100%;background-image: url( {% static "img/i1.jpg" %} ) !important;margin-right:0px;margin-bottom: 0px;'>
+					<div class="media-object-section">
+					{% if i.specifications.img %}
+						<img class="" src="{{i.specifications.img.url}}" style="height:115px;width: 115px; vertical-align:center;">
+					{% else %}
+						<img src="http://placehold.it/115x115" alt="" style=" vertical-align:center;">
+					{% endif %}
+					</div>
+				<div class="media-object-section expanded">
+				<ul style="list-style-type: none;">
+					<li><h5>{{i.name}}</h5></li>
+					<li><span class="glyphicon glyphicon-chevron-right" style="margin-right:5px; color:#1585cf;"></span><span>{{i.title}}</span></li>
+					<li><span class="glyphicon glyphicon-chevron-right" style="margin-right:5px; color:#1585cf;"></span><span>{{i.specifications.destiny}}</span></li>
+				</ul>
+					
+					
+					
+				</div>
+			</div>
+				</div>	
+				</a>
+			
+		{% endfor %}
+
+
+
+
+
+		</div>
+</div>
+{% endif %}
+
+
+
+<!-- <div class="callout primary text-center" style='background-image: url( {% static "img/mettal_ist.jpg" %} ) !important; opacity: 0.8;'>-->
+		<div class="callout text-center" style='background-image: url( {% static "img/mettal_ist1.png" %} ) !important; opacity: 0.8;margin-bottom: 0px;'>
+			<h2 class="title-block">Мы находимся здесь</h2>
+		</div>
+		<div id="map" style="width: 100%; height: 400px; margin-bottom:10px;"></div>
+	{% if block_info %}
+		<h2 class="callout text-center title-block" style='background-image: url( {% static "img/mettal_ist1.png" %} ) !important; opacity: 0.8;margin-bottom: 0px;'>
+			<!--<h2 class="title-block">Информация для ознакомления</h2>-->Информация для ознакомления
+		</h2>
+
+		<div class="medium-12 small-12 columns" style="font-size:20px; margin-bottom:1px;padding-left: 0.0px;padding-right: 0.0px;" id="">
+		{% for i in block_info %}
+			<div class="column info_block_id" style="padding:1px;width:50%;height:80px;margin-top: 1px;margin-bottom: 1px;">
+				<button class="button large expanded" onclick="hide_bot();" style="margin-bottom: 1px;height:80px;" data-open="Modal_{{i.alias}}" id="m-{{i.alias}}">
+				<span style="font-size:30px;"><i class="{{i.icon}}" style="padding-right:10px;padding-left:10px;"></i>{{i.title}}</span>
+				</button>
+			</div>
+		{% endfor %}
+		</div>
+	{% endif %}
+
+
+
+	
+
+	
+</div>
+<!---->
+<!---->
+{% for i in info %}
+<div id="Modal_{{i.alias}}" class="reveal large target_h" data-reveal data-animation-in="lift-in" style="z-index:999999999;">
+  <div id="one">
+        <h4 id="modalTitle" align="middle"  style="text-transform:uppercase;font-color:white;color:#2199e8;">{{i.title}}</h4>
+
+       <span>{% autoescape off %}{{i.content}}{% endautoescape %}</span>
+   
+    <button class="close-button" data-close arial-label="Close modal" type="button" ><span arial-hidden="true">&times;</span></button>
+  </div>
+</div>
+{% endfor %}
+<!---->
+
+<div class="chat_bot_medium">
+	{% if chat_on %}
+      {% load chat_bot %}{% chat_bot_tag %}
+	{% endif %}
+</div>
+
+<script type="text/javascript">
+  ymaps.ready(init);
+    var myMap,
+        myPlacemark;
+
+    function init(){     
+        myMap = new ymaps.Map("map", {
+            //center: [55.76, 37.64],60.584619 56.812163
+            center: [{{yan_x}}, {{yan_y}}],
+            zoom: 7
+        });
+
+        myPlacemark = new ymaps.Placemark([{{yan_x}}, {{yan_y}}], {
+            hintContent: 'Екатеринбург', 
+            balloonContent: 'Фурманова 125' 
+        });
+
+        myMap.geoObjects.add(myPlacemark);
+    }
+$('.close-button').click(function(){
+	$('.chat_bot_medium').css('display','block')
+		/*if ($('.target_h').css('display') == 'none'){
+		   	$('.chat_bot_medium').css('display','block')
+		   }*/
+});
+//$('.reveal-overlay').click
+$('body').on('click','.reveal-overlay', function(){
+	if($('.reveal-overlay').css('display')=='block'){
+		$('.chat_bot_medium').css('display','none')
+	}else{
+		$('.chat_bot_medium').css('display','block')
+	}
+	
+})
+function hide_bot(){
+	$('.chat_bot_medium').css('display','none');
+}
+
+   
+</script>
+<!---->
+{%endblock%}
+<!--GRAND-->

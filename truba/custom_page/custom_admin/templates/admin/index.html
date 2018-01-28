@@ -1,0 +1,22 @@
+{% extends "admin/index.html" %}
+
+{% comment %}{% block extrastyle %}
+    {{ block.super }}
+    {# --- custom styles --- #}
+{% endblock %}{% endcomment %}
+
+{% block content %}
+<div class="app-questions module">
+        <table>
+        <caption>
+            <a href="{% url 'show_admin_custom_page' %}" class="section" title="">НАСТРОЙКИ</a>
+        </caption>
+
+        </table>
+        </div>
+    <!--<div class="custom_block">
+        <h2><a href="{% url 'show_admin_custom_page' %}"><b>Основные настройки</b></a></h2>
+    </div>-->
+
+    {{ block.super }}
+{% endblock %}

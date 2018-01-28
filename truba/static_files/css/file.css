@@ -1,0 +1,306 @@
+ {% load staticfiles %}
+@font-face {
+      font-family: Romul; /* имя шрифта для CSS правил */
+      src: local("Romul"), /* проверяем наличие шрифта в ОС пользователя */
+        url({% static "font/Romul.otf" %}); /* если шрифт не установлен, тогда загружаем его по указанному пути */
+    }
+@font-face {
+      font-family: Exo_Semi_Bold; /* имя шрифта для CSS правил */
+      src: local("Exo_Semi_Bold"), /* проверяем наличие шрифта в ОС пользователя */
+        url({% static "font/Exo_2.0_Semi_Bold.ttf" %}); /* если шрифт не установлен, тогда загружаем его по указанному пути */
+    }
+body{
+  font-family: Exo_Semi_Bold !important;
+}
+h1{
+  font-family: Exo_Semi_Bold !important;
+}
+h2{
+  font-family: Exo_Semi_Bold !important;
+}
+h3{
+  font-family: Exo_Semi_Bold !important;
+}
+h4{
+  font-family: Exo_Semi_Bold !important;
+}
+h5{
+  font-family: Exo_Semi_Bold !important;
+}
+/*span{
+  font-family: Exo_Semi_Bold !important;
+}*/
+p{
+  font-family: Exo_Semi_Bold !important;
+}
+hr{
+  color:white !important;
+}
+.catalog_name{
+font-size:24px;
+}
+
+  .title-block{
+  /*font-family:Romul;*/
+  font-family: Exo_Semi_Bold;
+    
+  color:white;
+  font-size: 36px;
+  
+  text-shadow: rgb(46, 46, 46) 0px 4px 5px;
+  }
+
+  .fi-telephone::before{
+    color:black;
+    font-size:25px;
+    padding:10px;
+    vertical-align: middle;
+    padding-top: 5px;
+    white-space: nowrap;display: inline-block;
+              }
+  .fi-marker::before{
+    color:black;
+    font-size:25px;
+    padding:10px;
+    vertical-align: middle;
+    padding-top: 5px;
+    white-space: nowrap;display: inline-block;
+              }
+  .mail::before{
+    content:"\f16d";
+    color:black;
+    font-size:25px;
+    padding:10px;
+    vertical-align: middle;
+    padding-top: 5px;
+    white-space: nowrap;display: inline-block;
+              }
+    .format1{
+    font-size: 24px;
+    color:#2199e8;
+  }
+  .format2{
+    font-size: 18px;
+  }
+  .format-img{
+    margin-bottom:30px;
+  }
+  .small_grand_menu{
+    width: 0px;
+    display:none;
+  }
+  /*============      АДАПТИВ    ===========*/
+
+
+
+@media screen and (min-width: 1600px) {
+  .catalog_name{
+    font-size: 24px;
+  }
+
+    .grand_menu{
+  display: block;
+    }
+      .small_grand_menu{
+        width: 0px;
+    display:none;
+  }
+}
+@media screen and (max-width: 1280px) {
+    .catalog_name{
+    font-size: 24px;
+  }
+    .grand_menu{
+  display: block;
+    }
+      .small_grand_menu{
+        width: 0px;
+    display:none;
+  }
+}
+   @media screen and (max-width: 1024px) {
+      .catalog_name{
+    font-size: 24px;
+  }
+    .grand_menu{
+  display: block;
+    }
+      .small_grand_menu{
+        width: 0px;
+    display:none;
+  }
+}
+   @media screen and (max-width: 992px) {
+      .catalog_name{
+    font-size: 24px;
+  }
+    .grand_menu{
+  display: block;
+    }
+      .small_grand_menu{
+        width: 0px;
+    display:none;
+    
+
+  }
+
+}
+   @media screen and (max-width: 768px) {
+    .catalog_name{
+      font-size:18px;
+    }
+       .catalog_left_column{
+      width: 100% !important;
+    }
+    .catalog_right_block{
+      width: 100%;
+    }
+        .chat_bot_medium{
+      display:none !important;
+    }
+    .grand_menu{
+  display: none;
+    }
+      .small_grand_menu{
+        width: 0px;
+    display:block;
+    
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .thumbnail-img{
+    height:100px !important;
+    width: 100px !important;
+  }
+}
+   @media screen and (max-width: 648px) {
+        .catalog_name{
+      font-size:18px;
+    }
+          .info_block_id{
+  width: 100% !important;
+  }
+    .catalog_left_column{
+      width: 100% !important;
+    }
+        .catalog_right_block{
+      width: 100%;
+    }
+        .chat_bot_medium{
+      display:none !important;
+    }
+    .medium-sales{
+      display: none;
+    }
+    .small_sales{
+      
+      display: block;
+    }
+
+    .grand_menu{
+  display: none;
+    }
+      .small_grand_menu{
+        width: 0px;
+    display:block;
+   
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .thumbnail-img{
+    height:150px !important;
+    width: 150px !important;
+  }
+    .logo_title{
+    font-size: 45px !important;
+  }
+  .logo_title_img{
+    height: 50px !important;
+  }
+}
+   @media screen and (max-width: 480px) {
+        .catalog_name{
+      font-size:18px;
+    }
+        .catalog_right_block{
+      width: 100%;
+    }
+        .chat_bot_medium{
+      display:none !important;
+    }
+    .medium-sales{
+      display: none;
+    }
+      .info_block_id{
+  width: 100% !important;
+  }
+    .small_sales{
+      display: block;
+    }
+    .grand_menu{
+  display: none;
+    }
+      .small_grand_menu{
+    display:block;
+   
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .thumbnail-img{
+    height:150px !important;
+    width: 150px !important;
+  }
+    .logo_title{
+    font-size: 45px !important;
+  }
+  .logo_title_img{
+    height: 50px !important;
+  }
+}
+   @media screen and (max-width: 360px) {
+        .catalog_name{
+      font-size:18px;
+    }
+    .chat_bot_medium{
+      display:none !important;
+    }
+    .medium-sales{
+      display: none;
+    }
+    .small_sales{
+      display: block;
+    }
+      .info_block_id{
+  width: 100% !important;
+  }
+    .grand_menu{
+  display: none;
+    }
+      .small_grand_menu{
+    width: 0px;
+    display:block;
+    
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .thumbnail-img{
+    height:100px !important;
+    width: 100px !important;
+  }
+  .logo_title{
+    font-size: 45px !important;
+  }
+  .logo_title_img{
+    height: 50px !important;
+  }
+}
+  .required input{input:-moz-placeholder{color: red !important;font-style: italic;font-weight: bold;}
+       input::-webkit-input-placeholder{
+    color: red !important;   
+    font-style: italic;
+    font-weight: bold;
+}
+
+  }
+

@@ -1,0 +1,144 @@
+{% load staticfiles %}
+
+	<div style="display: block; transform: none;" class="">
+
+  <style id="widget_style3d" type="text/css">
+  #leadia_science_widget .widget_style3d_box_shadow {        -webkit-box-shadow: 0px 5px 19px rgba(120, 120, 120, 0.64) !important;        -moz-box-shadow: 0px 5px 19px rgba(120, 120, 120, 0.64) !important;        box-shadow: 0px 5px 19px rgba(120, 120, 120, 0.64) !important;    }</style>
+  <style class="leadia-widget-style">
+</style><!--[if lte IE 9]>
+<script type="text/javascript" src="//s3-eu-west-1.amazonaws.com/static.venyoo.ru/widget/js/placeholders.jquery.min.js"></script>
+<![endif]-->
+
+<div id="leadia_science_widget" >
+
+    <div class="leadia_widget widget_style3d_box_shadow" id="leadia-widget" style="border-radius: 10px !important; box-shadow: rgba(0, 0, 0, 0.2) 3px 10px 10px 0px !important; background-color: #1585cf; bottom: 20px !important; right: 20px !important;">
+        <div class="leadia_widget_notify" style="display:none; cursor: pointer;">Если возникнут вопросы, или нужна будет помощь, обращайтесь, я вам помогу</div>
+        <div class="leadia_widget_header" id="leadia-widget-header" style="display:inline-block !important;">
+      
+            <!--<ul style="display:inline-block !important;list-style-type: none;">-->
+     <style>
+      
+     </style>
+         <table cols="3" class="table_chat" style="background-color: #1585cf;border:0px !important;" >
+           <tr style="background-color: #1585cf;border:0px  !important;">
+             <td style="background-color: #1585cf;border:0px  !important;">
+                <div class="leadia_widget_photo">
+                <div class="leadia_widget_photo_flipper">
+                  <div class="leadia_widget_photo_front">
+                    {% if consultant.img %}
+                          <img class="" src="{{consultant.img.url}}">
+                    {% else %}
+                          <img src="http://placehold.it/54x54" alt="">
+                    {% endif %}
+                  </div>
+                  <div class="leadia_widget_photo_back">
+
+           
+                  </div>
+                </div>
+              </div>
+             </td>
+             <td style="background-color: #1585cf;border:0px  !important;margin-right: 56px;">
+                             <div class="leadia_widget_title">
+                                <div class="leadia-widget-worker-name">{{consultant.name}}</div><br>
+                                <div class="leadia_widget_text">{{consultant.rang}}</div>
+                            </div>
+
+                            
+             </td>
+             <td style="text-align:right;background-color: #1585cf;border:0px;">
+                   <!--<span class="glyphicon glyphicon-chevron-up" style="font-size:18px;color:white; display:none;"></span>-->
+                   <span class="glyphicon glyphicon-chevron-down" id="id_glyphicon-chevron" style="font-size:18px;color:white;margin-bottom:10px;"></span>
+             </td>
+           </tr>
+         </table>
+            
+            </div>
+        <div class="leadia_widget_body"><div id="_chat" style="display: block; position: static;">
+    <div class="leadia_content_custom_scroll ps-container ps-theme-default" style="height: 275px;overflow-y: scroll !important;">
+        <div class="leadia_widget_list" style="" id="">
+                <div class="msg_wrap" style="margin-top:3px;margin-bottom:3px;">
+
+                  <div class="leadia-widget-message-text" data-block-message="true">
+                    <p>{{consultant.rep1}}</p>
+                  </div>
+
+                  <div class="msg_wrap_corner"></div>
+
+                </div>
+
+
+
+         <div id="chat" class="" style="margin:0 0 0 0px;padding:0 0 0 0px;width:100%;text-align:right;">
+          </div>
+
+
+			        
+
+</div>
+
+ 
+    </div>
+    <div class="leadia_widget_textarea_wrap">
+        <div class="leadia_widget_shaker">
+            <textarea class="leadia_widget_textarea" id="leadia_widget_textarea_id" placeholder="Введите ваше сообщение"></textarea>
+            <div class="leadia_widget_send" id="send_messages_id" onclick='' style="background-color: #1585cf; border-color: #1585cf;">
+                <div class="leadia_widget_send_arrow"></div>
+            </div>
+            <div class="msg_wrap_corner_right"></div>
+        </div>
+
+    </div>
+</div><div id="_call" style="display: none; position: static;">
+    <div class="leadia_content_custom_scroll ps-container ps-theme-default" data-ps-id="c6c65d95-077a-bdbd-9578-e87db7370a20" style="height: 275px;">
+        <div class="leadia_widget_list">
+            
+        <div class="leadia_widget_msg leadia-widget-message-block leadia-widget-message-me leadia_widget_call_style" style="display: block !important;">
+
+    <div class="msg_wrap">
+        <div class="leadia-widget-message-text" data-block-message="true">
+            
+   
+            
+        </div>
+        <div class="msg_wrap_corner"></div>
+    </div>
+    <div class="leadia_msg_time" data-time="Thu Jul 13 2017 09:44:00 GMT+0500 (Пакистан (зима))">30 секунд назад</div>
+</div></div>
+    <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 3px;"><div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 0px; right: 3px;"><div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>
+    <div class="leadia_widget_textarea_wrap" style="display: none;">
+        <div class="leadia_widget_shaker">
+
+        </div>
+    </div>
+</div></div>
+        <div class="leadia_develope_by">
+	        <div class="leadia_develop_container">
+		        <div class="leadia_develop_container_inset">
+			        <div class="leadia_develop_text">
+			        </div>
+		        </div>
+	        </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="leadia-widget-pm-hor-marg" style="display:none">
+	<div class="leadia-widget-pad leadia-widget-pad-left" style="display: none; font-family: Helvetica, Arial; position: absolute; width: 80px; height: 47px; text-align: center; font-size: 19px; line-height: 19px; color: rgb(97, 159, 0); font-weight: bold; background-position: left bottom; background-repeat: no-repeat; bottom: 110px; background-image: url();">
+		<div class="leadia-widget-pad-val leadia-widget-pad-left-val" style="margin: 0px; padding: 0px; border: none; outline: none; font-size: 25px; width: 40px; display: inline-block; text-align: right;"></div> Px
+	</div>
+	<div class="leadia-widget-pad leadia-widget-pad-right" style="display: none; font-family: Helvetica, Arial; position: absolute; width: 80px; height: 47px; text-align: center; font-size: 19px; line-height: 19px; color: rgb(97, 159, 0); font-weight: bold; background-position: left bottom; background-repeat: no-repeat; bottom: 110px; background-image: url();">
+		<div class="leadia-widget-pad-val leadia-widget-pad-right-val" style="margin: 0px; padding: 0px; border: none; outline: none; font-size: 25px; width: 40px; display: inline-block; text-align: right;"></div> Px
+	</div>
+</div>
+
+<div class="leadia-widget-popup-dark-screen" style="z-index: 99999997; position: fixed; background: rgba(0, 0, 0, 0.5); width: 100%; height: 100%; top: 0px; left: 0px; display: none;"></div></div>
+
+</begin>
+<script src="{% static "js/jquery-2.1.4.min.js" %}"></script>
+<script>
+  var rep2="{{consultant.rep2}}";var rep3="{{consultant.rep3}}";
+</script>
+<script src="{% static "js/chat_bot.js" %}"></script>
+

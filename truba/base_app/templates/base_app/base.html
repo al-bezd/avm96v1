@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<!-- saved from url=(0069)http://foundation.zurb.com/templates-previews-sites-f6/ecommerce.html -->
+<html class="" lang="en"><head>{% load staticfiles %}
+<script>window.CKEDITOR_BASEPATH = '/static_files/ckeditor/ckeditor/';</script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="{{seo_title_page.words}}">
+    <meta name="description" content="{{seo_title_page.alt}}">
+<!--<title>{{site_settings_grand.company}}</title>-->
+<title>{{seo_title_page.title}}</title>
+<!--<script src="{% static "js/jquery-2.1.4.min.js" %}"></script>3.2.1-->
+
+
+
+<script src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+
+<link rel="stylesheet" href="{% static 'css/foundation.min.css' %}">
+<link href="{% static 'css/foundation-icons.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'css/foundation-icons.css' %}" rel="stylesheet">
+<link href="{% static 'css/chat_bot.css' %}" rel="stylesheet">
+<link href="{% static 'css/zurb_templ.css' %}" rel="stylesheet">
+<link href="{% static 'css/file.css' %}" rel="stylesheet">
+
+
+
+
+
+ 
+<meta class="foundation-mq">
+    {{seo_links}}
+</head>
+<body>{% csrf_token %}
+<style>
+  @font-face {
+      font-family: Romul;
+      src: local("Romul"),
+        url({% static "font/Romul.otf" %});
+    }
+@font-face {
+      font-family: Exo_Semi_Bold;
+      src: local("Exo_Semi_Bold"),
+        url({% static "font/Exo_2.0_Semi_Bold.ttf" %});
+    }
+</style>
+ 
+ 
+<script async="" src="{% static 'js/analytics.js' %}"></script>
+<script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-2195009-2', 'auto');
+      ga('send', 'pageview');
+
+      ga('create', 'UA-2195009-27', 'auto', {name: "foundation"});
+      ga('foundation.send', 'pageview');
+
+    </script>
+
+
+
+
+<div class="row text-center" style="display:block-inline;" >
+    <div style="margin:10px;">
+<div >
+      <span style="padding:10px;font-size:20px;white-space: nowrap;">
+        <a class="fi-telephone large" href="tel:{{tel}}" >{{tel}}</a>
+      </span>
+      <span style="padding:10px;font-size:20px;white-space: nowrap;">
+        <span class="fi-marker large" style="">
+        {% if nation %}
+          {{nation}},
+        {% endif %}
+        <!--{% if site_settings_contacts.region %}
+        {% endif %}-->
+        {% if city %}
+          {{city}},
+        {% endif %}
+        {% if street %}
+          {{street}},
+        {% endif %}
+        {% if home %}
+          {{home}}
+        {% endif %}
+        
+        </span>
+      </span>
+      <span style="padding:10px;font-size:20px;white-space: nowrap;">
+        <a class="fi-mail large mail" href="mailto:{{email}}">{{email}}</a>
+      </span> 
+</div>
+    </div>
+</div>
+
+<hr style="margin-top:0px;margin-bottom:0px;max-width: 100%;">
+
+<div class="info row" style="/*position:fixed;*/;margin-bottom: 10px !important;">
+	<div class="top-bar-center" style="/*margin-top: 10px;margin-bottom: 10px;*/">
+    <div class="medium-12 small-12 columns" align="left">
+      <a href="/base/">
+      {% if logo %}
+                          <img class="logo_title_img" src="{{logo}}" style="max-height:100px; width:auto;">
+                    {% endif %}
+      </a>
+      <a href="/base/"><span class="logo_title" style="word-wrap: break-word;font-size:71px;color:#3534F1;margin:0 0 0 0px;font-family:Exo_Semi_Bold;vertical-align:middle;/*font-weight: bold;*/"><strong>{{company}}</strong></span></a>
+    </div>
+  </div>
+	
+</div>
+    <div class="small_grand_menu expanded small-12 columns">
+      <ul class="vertical dropdown menu expanded text-center" data-dropdown-menu style="max-width: 250px;">
+        <li class="expanded small_grand_menu" style="">
+          <a href="#" class="button expanded" style="font-size:20px;"><b>КАТАЛОГ</b></a>
+          <ul class="vertical menu">
+                 {% for i in catalog %}
+            {%if i.parent_alias == 'none' %}
+              <li  class="small_grand_menu" style="text-transform:uppercase;font-family:Exo_Semi_Bold;margin-bottom:0px;">
+                
+                  <a href="/c={{i.alias}}/" class="button expanded"   style="font-size:14px;color:white;"> {{i.name}}</a>
+               
+              </li>
+              {%endif%}
+          {% endfor %}
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="marketing-subnav small-up-2 large-up-4 grand_menu">
+      <ul class="menu  medium-horizontal expanded medium-text-center dropdown dropdown menu" data-dropdown-menu="kbgh9p-dropdown-menu" role="menubar" id="grand_menu">
+
+         {% for i in catalog %}
+            {%if i.parent_alias == 'none' %}
+              <li class="button" style="font-weight: bold;text-transform:uppercase;font-family:Exo_Semi_Bold;">
+                
+                  <a href="/c={{i.alias}}/" onclick="document.location='/c={{i.alias}}/'" style="font-size:14px;color:white;"> {{i.name}}</a>
+                      <ul class="menu submenu is-dropdown-submenu first-sub vertical expanded" data-submenu="" role="menu" style="">
+                          {% for j in catalog%}
+                              {% if i.alias == j.parent_alias%}
+                                  <li role="menuitem" class="is-submenu-item is-dropdown-submenu-item expanded">
+                                      <a href="/c={{j.alias}}/" style="font-size:14px;">
+                                          {{j.name}}
+                                      </a>
+                                  </li>
+                              {% endif %}
+                          {% endfor %}
+                      </ul>
+                
+              
+              </li>
+              {%endif%}
+          {% endfor %}
+      </ul>
+    </div>
+<!--GRAND-->
+{% block grand %}{%endblock%}
+{% block catalog %}{%endblock%}
+{% block production %}{%endblock%}
+<!--GRAND--> 
+<div class="callout secondary" style='background-image: url( {% static "img/mettal_ist1.png" %} ) !important; opacity: 0.8;max-height: 200px;'>
+<div class="row">
+
+
+  <div class="large-12 medium-12 small-12 columns">
+  <table>
+<tbody style="background: transparent !important;">
+    <tr>
+      <td><p style="margin-bottom: 0px;">Разработчик:</p></td>
+      <td><a href="mailto:{{dev_email}}" style="font-size:26px;color:black;"><i class="fi-torso-business" title="Разработка сайта"></i></a></td>
+    </tr>
+</tbody>
+  </table>
+    <span style="white-space: nowrap !important;" hidden=""><p style="margin-bottom: 0px;">Разработчик:</p><a href="mailto:{{dev_email}}" style="font-size:26px;color:black;"><i class="fi-torso-business" title="Разработка сайта"></i></a></span>
+  </div>
+
+
+</div>
+
+
+
+
+<!---->
+</div>
+
+<!--consult-->
+
+<!--</script>-->
+
+
+<!--consult_end
+<script src="{% static "js/jquery-2.1.4.min.js" %}"></script>
+<!--<script src="{% static "js/vendor/jquery.js" %}"></script>->
+<script src="{% static "js/vendor/what-input.js" %}"></script>
+<!--<script src="{% static "js/foundation.min6.js" %}"></script>->
+<script src="{% static "foundation-sites-6.4.3/dist/js/foundation.min.js" %}"></script>
+
+<script>$(document).foundation();</script>
+
+<script type="text/javascript" src="{% static "js/zcom.js" %}"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>-->
+<script src="{% static 'js/jquery.js' %}"></script>
+
+ 
+
+<!--<script src="https://code.jquery.com/jquery-3.2.1.min.js" ></script>-->
+<!--<script src="{% static "js/foundation.js" %}"></script>работает но не вводит в модале-->
+<script src="{% static 'foundation-sites-6.0.0/dist/foundation.js' %}"></script>
+
+
+
+<!--<script src="{% static "foundation-sites-6.4.3/dist/js/foundation.js" %}"></script>-->
+<script type="text/javascript" src="{% static 'js/zcom.js' %}"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
+<script>
+      $(document).foundation();
+    </script>
+
+<!--<script src="{% static "js/foundation.min6.js" %}"></script>-->
+
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js"  crossorigin="anonymous"></script>
+<script src="{% static "js/foundation.js" %}"></script>-->
+<script>
+      $(window).resize(function(){
+   var w=$(window).width();
+    $('.small_grand_menu').css('width',String(w)+'px');
+    console.log(w);
+
+});
+        $(document).ready(function(){
+         var w=$(window).width();
+    $('.small_grand_menu').css('width',String(w)+'px');
+    console.log(w);
+  });
+</script>
+
+</body></html>

@@ -1,0 +1,255 @@
+{% extends "base_app/base.html" %}
+ 
+<!--GRAND-->
+{% block production %}
+ {% load staticfiles %}
+<span id="templname" style="display:none;">production</span>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<br>
+ 
+<div class="row columns">
+<nav aria-label="You are here:" role="navigation">
+<ul class="breadcrumbs">
+<li><a href="/base/">Главная</a></li>
+<li><a href="/c={{parent_href_over.alias}}/">{{parent_href_over.name}}</a></li>
+<li><a href="/c={{parent_href.alias}}/">{{parent_href.name}}</a></li>
+<li>
+<span class="show-for-sr">Current: </span> {{production.name}}
+</li>
+</ul>
+</nav>
+</div>
+<div class="row">
+<div class="medium-6 columns">
+{% if production.specifications.img %}
+  <img class="thumbnail" src="{{production.specifications.img.url}}" alt="not found" style="/*width:650px;*/max-height: 350px;">
+{% else %}
+  <img class="thumbnail" src="" alt="Нет картинки" style="/*width:650px;*/max-height: 350px;">
+{% endif %}
+<!--<img class="thumbnail" src="{% static "{{production.specifications.img}}" %}" alt="not found" style="width:650px;height: 350px;">-->
+
+</div>
+<div class="medium-6 large-5 columns">
+<h1 style="font-size: 44px;"><strong >{{production.name}}</strong></h1 style="font-size:24px;">
+<p>{{production.specifications.destiny}}</p>
+<label>{#<h3>Цена за метр</h3>#}
+<br>
+<span style="color:#2199e8;"><h2>{{production.specifications.price}} {{production.parent.units_of_calculus}}</h2></span>
+</label>
+<div class="row">
+<div class="small-3 columns">
+
+</div>
+<div class="small-9 columns">
+
+</div>
+</div>
+<!--<button data-open="myModal" aria-controls='myModal' id="call_modal_btn_id1" class="button large expanded">Заказать сейчас</button>-->
+<button id="call_modal_btn_id" class="button large expanded">Заказать сейчас</button>
+<div class="small secondary expanded button-group">
+<!--<a class="button">Facebook</a>
+<a class="button">Twitter</a>
+<a class="button">Yo</a>-->
+</div>
+</div>
+</div>
+<hr>
+<div class="row medium-10 large-9 columns" id="content_id">
+
+
+<div class="tabs-content" data-tabs-content="example-tabs">
+<div class="tabs-panel is-active" id="panel1">
+<!--Описание продукции-->
+{% if production.specifications.product_description %}
+<div class="media-object stack-for-small">
+    <h4 align="middle" style="color:#2199e8;">Описание продукции</h4>
+    <div class="media-object-section">
+
+        <p>{% autoescape off %}{{production.specifications.product_description}}{% endautoescape %}</p>
+    </div>
+</div>
+{%endif%}
+<!--Область применения-->
+    {%if production.specifications.application_area%}
+<div class="media-object stack-for-small">
+<!--<div class="media-object-section">
+<img class="thumbnail" src="http://placehold.it/200x200">
+</div>-->
+<div class="media-object stack-for-small text-left" >
+<h4 align="middle" style="color:#2199e8;">Область применения</h4>
+<p><span>{% autoescape off %}{{production.specifications.application_area}}{% endautoescape %}</span></p>
+</div>
+</div>
+    {%endif%}
+<!--Приемущества-->
+    {%if production.specifications.comment%}
+<div class="media-object stack-for-small" align="middle">
+
+<div class="media-object-section">
+<h4 align="middle" style="color:#2199e8;" >Приемущества</h4>
+<div id="over_id_content" style="text-align:left;"><span>{% autoescape off %}{{production.specifications.comment}}{% endautoescape %}</span></div>
+
+</div>
+</div>
+    {%endif%}
+
+</div>
+
+</div>
+</div>
+
+
+
+<style>
+
+
+</style>
+
+<div id="myModal" class="reveal medium-12 small-12" data-reveal="true" data-reset-on-close="true" data-reset-on-close="true" data-animation-in="lift-in" style="margin-left: 30%;margin-right: 30%;">
+  <div id="one">
+        <h4 id="modalTitle" align="middle"  style="text-transform:uppercase;font-color:white;color:#2199e8;">Оставьте заявку прямо сейчас</h4>
+
+        <h5 align="middle">И наш менеджер свяжется с Вами в течении 15 минут</h5>
+          <input type="text" class="required" placeholder="Иванов Иван*" id="fio_id" title="Обязательное к заполнению поле">
+          <input type="text" class="required" placeholder="+7(929)232-23-23*" id="tel_id" title="Обязательное к заполнению поле">
+          <input type="text" readonly="" value="{{production.name}}">
+          <textarea placeholder="Комментарий" id="comment_id" style="
+          margin: 0px 2px 16px 0px; 
+          height: 135px; 
+          width: 565px;
+          display: block;
+          resize: none;"></textarea> 
+          <button class="button expanded" style="text-transform:uppercase;" id="send_order_id">отправить</button>
+   
+    <button class="close-button" data-close arial-label="Close modal" type="button" ><span arial-hidden="true">&times;</span></button>
+  </div>
+
+  <div id="two" class="success callout" hidden="true" style="border-size:0 0 0 0px;margin:0px 0px 0px 0px;">
+          <h4 align="middle">Ваша заявка отправленна, ожидайте звонка консультанта</h4>
+          <button class="close-button" data-close arial-label="Close modal" type="button" ><span arial-hidden="true">&times;</span></button>
+  </div>
+</div>
+
+<div class="reveal-overlay" id="reveal-overlay-id" style="display: none;" onclick="Hide2();"></div>
+
+{% load staticfiles %}
+
+
+<script>
+$('#call_modal_btn_id').click(function(){
+  $('#reveal-overlay-id').show();
+  $('#reveal-overlay-id').css('z-index','1005');
+  $('#myModal').show();
+  $('#myModal').css('z-index','1006');
+  $('#myModal').css('position','fixed');
+  $('#myModal').css('top','0px');
+  $('#myModal').css('left','0px');
+  $('#myModal').css('margin-left','30%');
+  $('#myModal').css('margin-right','30%');
+  $('#myModal').css('margin-top','10%');
+});
+$('#reveal-overlay-id').click(function(){
+  $('#myModal').hide();
+  $('#reveal-overlay-id').hide();
+});
+$(document).ready(function(){ 
+var e = jQuery.Event( "$('#myModal').css('display','none')" );
+
+
+//Костыль
+/*var m = document.getElementById("content_id").innerHTML;
+var res =m.replace(/&lt;/gi,'<').replace(/&gt;/gi,'>');
+document.getElementById("content_id").innerHTML=res;*/
+//
+
+function Hide2(){
+  $('#myModal').hide();
+  $('#reveal-overlay-id').hide();
+}
+
+$('.close-button').click(function(){
+Hide2();
+  GoBack();
+
+    
+});
+
+  $('#send_order_id').click(function(){
+    if (($('.required').val() == '')||($('input + .required').val() == ''))
+    {
+      alert('Заполните поля со звёздочками*');
+    }
+    else
+    {
+
+
+    
+  $.ajax({
+          type:"POST",
+          url:"/p={{production.alias}}/",
+          data:{
+            'name_client':$('#fio_id').val(),
+            'tel':$('#tel_id').val(),
+            'comment':$('#comment_id').val(),
+            'alias':'{{production.alias}}',
+            'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val()
+          },
+          success:Success_resp(), 
+          dataType:'html'
+          });
+     };
+
+
+  });
+
+//success callout
+function Success_resp(){
+  //$('#myModal').css('display','none');
+  $('#two').css('display','block');
+  $('#myModal').css('padding','0px');
+  $('#one').css('display','none');
+  //$('#fio_id').val('');
+  //$('#tel_id').val('');
+
+};
+
+function GoBack(){
+  $('#two').css('display','none');
+  $('#one').css('display','block');
+  $('#myModal').css('padding','16px');
+};
+$(document).click(function(){
+  if($('#myModal').css('display')=='none'){
+      $('#fio_id').val('');
+      $('#tel_id').val('');
+      $('#comment_id').val('');
+      //GoBack();
+    }
+});
+
+
+
+  });
+
+  $(document).ready(function(){
+      $.ajax({
+          type:"POST",
+          url:"",
+          data:{
+            'views':'{{production.alias}}',
+            'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val()
+          },
+          //success:alert('+'),
+          dataType:'html'
+          });
+
+
+
+
+  });
+
+</script>
+
+
+
+{%endblock%}

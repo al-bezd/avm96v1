@@ -1,0 +1,167 @@
+{% extends "base_app/base.html" %}
+ 
+<!--GRAND-->
+{% block catalog %}
+
+<!--<div class="off-canvas-wrapper">-->
+{% load staticfiles %}
+{% csrf_token %}
+
+<div class="row" data-off-canvas-wrapper="" style="margin-left:0px;margin-right:0px;">
+
+<div class="row columns" style="margin-left:5px;">
+<!--<nav aria-label="You are here:" role="navigation">
+  <ul class="breadcrumbs">
+    <li><a href="/base/">Главная</a></li>
+      {% if parent_href_over != none %}
+      <li><a href="/c={{parent_href_over.alias}}/">{{parent_href_over.name}}</a></li>
+      {% endif %}
+        <li><a class="show-for-sr" href="/c={{parent_href.alias}}/">{{parent_href.name}}</a></li>
+
+  </ul>
+</nav>-->
+</div>
+
+<div class="medium-3 columns" id="my-info" data-off-canvas="" data-position="left" aria-hidden="true" data-offcanvas="iouynn-offcanvas" style="margin-top: 20px;">
+  <div class="row column">
+  <br>
+  <ul class="accordion">
+  {%for g in catalog_in%}
+  <a href="/c={{g.alias}}/">
+    <li class="accordion-title">
+      {{g.name}}
+    </li>
+  </a>
+  
+  {%endfor%}
+  </ul>
+  </div>
+</div>
+
+<div class="medium-9 columns" data-off-canvas-content="">
+      <nav aria-label="You are here:" role="navigation" style="margin-top:10px;">
+        <ul class="breadcrumbs">
+          <li><a href="/base/">Главная</a></li>
+            {% if parent_href_over != none %}
+            <li><a href="/c={{parent_href_over.alias}}/">{{parent_href_over.name}}</a></li>
+            {% endif %}
+              <li><a class="show-for-sr" href="/c={{parent_href.alias}}/">{{parent_href.name}}</a></li>
+
+        </ul>
+      </nav>
+
+<div class="callout primary">
+  <div class="row column">
+    <h1>{{name_catalog.name}}</h1>
+    <!--<p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus luctus urna sed urna ultricies ac tempor dui sagittis. In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla.</p>-->
+  </div>
+</div>
+
+<div class="row small-up-2 medium-up-3 large-up-4">
+
+{%for i in production%}
+
+    <div class="column">
+    <a href="/p={{i.alias}}">
+    
+          {% if i.specifications.img %}
+          <img class="thumbnail" src="{{i.specifications.img.url}}" style="height:auto;width:550px;">
+          {%else%}
+          <img class="thumbnail" src="http://placehold.it/550x550" style="height:auto;width:550px;">
+          {% endif %}
+    <h5>{{i.title}} <br> {{i.specifications.price}} {{name_catalog.units_of_calculus}}</h5>
+    </a>
+    </div>
+  
+{%endfor%}
+
+
+{%for i in production_catalog%}
+  {%if i.parent != 'none' %}
+    <div class="column text-center">
+    <a href="/c={{i.alias}}">
+
+        {% if i.img %}
+        <img class="thumbnail" src="{{i.img.url}}" style="height:auto;width:550px;">
+        {%else%}
+        <img class="thumbnail" src="http://placehold.it/550x550" style="height:auto;width:550px;">
+        {% endif %}
+    <h5 style="text-transform:uppercase;">{{i.name}} </h5>
+    </a>
+    </div>
+  {%endif%}
+{%endfor%}
+
+
+
+</div>
+<hr id="hr">
+<div class="row" id="question_block_widget">
+
+  <div class="medium-6 columns">
+  <h3>Задайте нам вопрос</h3>
+  <p>Вы можете задать нам вопрос на любую интересующую вас тему, для этого просто укажите свое Имя и Фамилию, а также адрес электронной почты, для того что бы мы могли написать вам ответ</p>
+  <!--<ul class="menu">
+  <li><a href="http://foundation.zurb.com/templates-previews-sites-f6/portfolio.html#">Dribbble</a></li>
+  <li><a href="http://foundation.zurb.com/templates-previews-sites-f6/portfolio.html#">Facebook</a></li>
+  <li><a href="http://foundation.zurb.com/templates-previews-sites-f6/portfolio.html#">Yo</a></li>
+  </ul>-->
+  </div>
+<div class="medium-6 columns text-center" id="quesion_block_id">
+  <label>Имя Фамилия
+  <input type="text" placeholder="Имя Фамилия" id="client_name">
+  </label>
+  <label>Email
+  <input type="text" placeholder="Email" id="email">
+  </label>
+  <label>
+  Мой вопрос
+  <textarea placeholder="Меня интересует..." style="resize: none;height: 130px;" id="question"></textarea>
+  </label>
+  <input type="submit" class="button expanded" value="Задать вопрос" id="send_question">
+</div>
+</div>
+<div class="js-off-canvas-exit"></div></div>
+</div>
+<!--</div>-->
+<script src="{% static "js/jquery-2.1.4.min.js" %}"></script>
+<script>
+  $('#send_question').click(function(){
+
+
+  $.ajax({
+      type:'POST',
+      url:"/quest/",
+      data:{
+        'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+        'client_name':$('#client_name').val(),
+        'email':$('#email').val(),
+        'question':$('#question').val()
+      },
+      error:alert('-'),
+      success:alert('+'),
+      datatype:'html'
+
+    });
+//$('#question_block_widget').text('<div class="callout prymary"><h3>Вопрос отправлен наши специалисты ответят вам в ближайшие 24 часа.</h3></div>');
+
+AnswerSuccess();
+  });
+
+  function AnswerSuccess(){
+      question_block_widget.innerHTML='<div class="callout success text-center"><h3>Вопрос отправлен наши специалисты ответят вам в ближайшие 24 часа.</h3></div>';
+      $('#client_name').val('');
+      $('#email').val('');
+      $('#question').val('');
+      //$(".leadia_widget_body").css("display", 'block');
+      setTimeout(HideBlock, 4000);
+      
+  };
+
+  function HideBlock(){
+    $("#question_block_widget").animate({ height: "0px"}, 300);
+    $("#hr").hide();
+  };
+
+</script>
+{%endblock%}

@@ -7,7 +7,7 @@
 {% load staticfiles %}
 {% csrf_token %}
 
-<div class="row" data-off-canvas-wrapper="" style="margin-left:0px;margin-right:0px;">
+<div class="row" data-off-canvas-wrapper="" style="margin-left:0px;margin-right:0px;margin-bottom:10px;">
 
 <div class="row columns" style="margin-left:5px;">
 <!--<nav aria-label="You are here:" role="navigation">
@@ -48,7 +48,7 @@
   </div>
 </div>
 
-<div class="medium-9 small-12 columns catalog_right_block" data-off-canvas-content="">
+<div class="medium-9 small-12 columns catalog_right_block" data-off-canvas-content="" style="margin-bottom: 10px;">
       <nav aria-label="You are here:" role="navigation" style="margin-top:10px;">
         <ul class="breadcrumbs">
           <li><a href="/base/">Главная</a></li>
@@ -83,7 +83,7 @@
       <h5>{{i.title}} <br> {{i.specifications.price}} {{name_catalog.units_of_calculus}}</h5>
       </a>
       <div class="text-center fst_shop">
-      	<span>купить сейчас!</span>
+      	<span  onclick="AliasAndName('{{i.alias}}','{{i.name}}');" >купить сейчас!</span>
       </div>
       </div>
     
@@ -141,10 +141,78 @@
 </div>
 </div>
 <div class="js-off-canvas-exit"></div></div>
+<div id="myModal" class="reveal medium-12 small-12" data-reveal="true" data-reset-on-close="true" style="margin-left: 30%;margin-right: 30%;padding: 0px;">
+  <div id="one" style="margin: 16px;">
+<form action="" id="form_send" method=""><div hidden="">{{csrf_token}}</div>
+        <h4 id="modalTitle" align="middle"  style="text-transform:uppercase;font-color:white;color:#2199e8;">Оставьте заявку прямо сейчас</h4>
+
+        <h5 align="middle">И наш менеджер свяжется с Вами в течении 15 минут</h5>
+          <input 
+              type="text"
+              class="required" 
+              placeholder="Иванов Иван*" 
+              id="fio_id" 
+              title="Обязательное к заполнению поле" 
+              required="" 
+              name="name_client"
+              >
+              
+          <input 
+              type="text" 
+              class="required" 
+              placeholder="+7(929)232-23-23*" 
+              id="tel_id" 
+              title="Обязательное к заполнению поле" 
+              required="" 
+              name="tel"
+              >
+             
+          <input 
+              type="text" 
+              class="" 
+              placeholder="my_email@email.com" 
+              id="email_id" 
+              title="Не обязательное к заполнению поле" 
+              name="email"
+              >
+
+          <input type="text" readonly="" value="{{production.name}}" id="production_name_id">
+          <input type="text" readonly="" value="{{production.alias}}" name="alias" id="production_alias_id" style="display: none;">
+          <textarea placeholder="Комментарий" id="comment_id" name="comment" style="
+          margin: 0px 2px 16px 0px; 
+          height: 135px; 
+          width: 565px;
+          display: block;
+          resize: none;"></textarea> </form>
+          <button class="button expanded" style="text-transform:uppercase;" id="send_order_id" onclick="sendAjaxForm('two', 'form_send', '/order/');">отправить</button>
+   
+    <button class="close-button" data-close arial-label="Close modal" type="button" ><span arial-hidden="true">&times;</span></button>
+
+
+
+  </div>
+
+  <div id="two" class="success callout" hidden="true" style="border-size:0 0 0 0px;margin:0px 0px 0px 0px;">
+          <h4 align="middle">Ваша заявка отправленна, ожидайте звонка консультанта</h4>
+          <button class="close-button" data-close arial-label="Close modal" type="button" ><span arial-hidden="true">&times;</span></button>
+  </div>
+</div>
 </div>
 <!--</div>-->
 <script src="{% static "js/jquery-2.1.4.min.js" %}"></script>
 <script>
+//data-open="myModal" aria-controls='myModal'
+function AliasAndName(alias,name){
+  document.getElementById('production_name_id').value=name;
+  document.getElementById('production_alias_id').value=alias;
+  $('#two').hide();
+  $('#one').show();
+  $('#fio_id').css('border','1px solid #cacaca');
+  $('#tel_id').css('border','1px solid #cacaca');
+  $('#myModal').foundation('open');
+
+
+}
   $('#send_question').click(function(){
 
 
@@ -184,5 +252,36 @@ AnswerSuccess();
     $("#question_block_widget").hide();
   };
 
+
+
+
+ 
+function sendAjaxForm(two, ajax_form, url) {
+  if (document.getElementById('form_send').checkValidity())
+  {
+    $.ajax({
+        url:     url, //url страницы (action_ajax_form.php)
+        type:     "POST", //метод отправки
+        dataType: "html", //формат данных
+        data: $("#"+ajax_form).serialize(),  // Сеарилизуем объект
+        success: function() { //Данные отправлены успешно
+          $('#two').show();
+          $('#one').hide();
+      },
+      error: function() { // Данные не отправлены
+            $('#two').html('<h4 align="middle">Ошибка. Данные не отправлены.</h4><button class="close-button" data-close arial-label="Close modal" type="button" ><span arial-hidden="true">&times;</span></button>');
+      }
+  });
+  } else {
+   if ($('#fio_id').val()===''){
+    $('#fio_id').css('border','solid red')
+   }
+
+   if ($('#tel_id').val()===''){
+    $('#tel_id').css('border','solid red')
+   }
+
+  }
+}
 </script>
 {%endblock%}

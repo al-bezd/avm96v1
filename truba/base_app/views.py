@@ -2,7 +2,7 @@
 import os
 
 from django.core.serializers import json
-from django.http.response import HttpResponseNotFound
+from django.http.response import HttpResponseNotFound, HttpResponse
 
 from chat_app.models import ChatConsultant
 from django.shortcuts import render
@@ -100,7 +100,7 @@ def choise_production(request,prod_resp):
             order=Order(
                 name_client=request.POST['name_client'],
                 tel = request.POST['tel'],
-                #email = request.POST['email'],
+                email = request.POST['email'],
                 product = '%s|%s'%(p.name,p.alias),
                 comment = request.POST['comment'],
             )
@@ -114,16 +114,20 @@ def choise_production(request,prod_resp):
 
     response = render(request, 'base_app/production.html', context)
     return response
+
 def add_order(request):
     if request.method == 'POST':
-        if request.POST.get('name'):
+        if request.POST.get('name_client'):
             p=Production.objects.get(alias=request.POST['alias'])
             order=Order(
                 name_client=request.POST['name_client'],
                 tel = request.POST['tel'],
-                #email = request.POST['email'],
+                email = request.POST['email'],
                 product = '%s|%s'%(p.name,p.alias),
                 comment = request.POST['comment'],
             )
             order.save()
+            p.sum_orders = +1
+            p.save()
+            return HttpResponse('Done!')
 

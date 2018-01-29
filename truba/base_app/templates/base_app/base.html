@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- saved from url=(0069)http://foundation.zurb.com/templates-previews-sites-f6/ecommerce.html -->
 <html class="" lang="en"><head>{% load staticfiles %}
-<script>window.CKEDITOR_BASEPATH = '/static_files/ckeditor/ckeditor/';</script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
 
 
@@ -103,7 +103,7 @@
     <div class="medium-12 small-12 columns" align="left">
       <a href="/base/">
       {% if logo %}
-                          <img class="logo_title_img" src="{{logo}}" style="max-height:100px; width:auto;">
+                          <img class="logo_title_img" src="/static/logo/{{logo}}" style="max-height:100px; width:auto;">
                     {% endif %}
       </a>
       <a href="/base/"><span class="logo_title" style="word-wrap: break-word;font-size:71px;color:#3534F1;margin:0 0 0 0px;font-family:Exo_Semi_Bold;vertical-align:middle;/*font-weight: bold;*/"><strong>{{company}}</strong></span></a>

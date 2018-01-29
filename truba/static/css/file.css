@@ -36,6 +36,9 @@ p{
 hr{
   color:white !important;
 }
+form input:invalid{
+	outline:red;
+}
 .fst_shop{
   color: white;
   background-color: #2199e8;
@@ -45,6 +48,7 @@ hr{
    transition: 0.5s;
     color: #2199e8;
     background-color: white;
+    cursor: pointer;
   }
 
 .catalog_name{

@@ -30,7 +30,7 @@
 
 </div>
 <div class="medium-6 large-5 columns">
-<h1 style="font-size: 44px;"><strong >{{production.name}}</strong></h1 style="font-size:24px;">
+<h1 style="font-size: 44px;"><strong >{{production.name}}</strong></h1 style='font-size:24px;'>
 <p>{{production.specifications.destiny}}</p>
 <label>{#<h3>Цена за метр</h3>#}
 <br>
@@ -44,8 +44,8 @@
 
 </div>
 </div>
-<!--<button data-open="myModal" aria-controls='myModal' id="call_modal_btn_id1" class="button large expanded">Заказать сейчас</button>-->
-<button id="call_modal_btn_id" class="button large expanded">Заказать сейчас</button>
+<button data-open="myModal" aria-controls='myModal' id="call_modal_btn_id" class="button large expanded">Заказать сейчас</button>
+<!--<button id="call_modal_btn_id" class="button large expanded">Заказать сейчас</button>-->
 <div class="small secondary expanded button-group">
 <!--<a class="button">Facebook</a>
 <a class="button">Twitter</a>
@@ -105,23 +105,55 @@
 
 </style>
 
-<div id="myModal" class="reveal medium-12 small-12" data-reveal="true" data-reset-on-close="true" data-reset-on-close="true" data-animation-in="lift-in" style="margin-left: 30%;margin-right: 30%;">
-  <div id="one">
+<div id="myModal" class="reveal medium-12 small-12" data-reveal="true" data-reset-on-close="true" style="margin-left: 30%;margin-right: 30%;padding: 0px;">
+  <div id="one" style="margin: 16px;">
+<form action="" id="form_send" method=""><div hidden="">{{csrf_token}}</div>
         <h4 id="modalTitle" align="middle"  style="text-transform:uppercase;font-color:white;color:#2199e8;">Оставьте заявку прямо сейчас</h4>
 
         <h5 align="middle">И наш менеджер свяжется с Вами в течении 15 минут</h5>
-          <input type="text" class="required" placeholder="Иванов Иван*" id="fio_id" title="Обязательное к заполнению поле">
-          <input type="text" class="required" placeholder="+7(929)232-23-23*" id="tel_id" title="Обязательное к заполнению поле">
+          <input 
+              type="text"
+              class="required" 
+              placeholder="Иванов Иван*" 
+              id="fio_id" 
+              title="Обязательное к заполнению поле" 
+              required="" 
+              name="name_client"
+              >
+              
+          <input 
+              type="text" 
+              class="required" 
+              placeholder="+7(929)232-23-23*" 
+              id="tel_id" 
+              title="Обязательное к заполнению поле" 
+              required="" 
+              name="tel"
+              >
+             
+          <input 
+              type="text" 
+              class="" 
+              placeholder="my_email@email.com" 
+              id="email_id" 
+              title="Не обязательное к заполнению поле" 
+              name="email"
+              >
+
           <input type="text" readonly="" value="{{production.name}}">
-          <textarea placeholder="Комментарий" id="comment_id" style="
+          <input type="text" readonly="" value="{{production.alias}}" name="alias" style="display: none;">
+          <textarea placeholder="Комментарий" id="comment_id" name="comment" style="
           margin: 0px 2px 16px 0px; 
           height: 135px; 
           width: 565px;
           display: block;
-          resize: none;"></textarea> 
-          <button class="button expanded" style="text-transform:uppercase;" id="send_order_id">отправить</button>
+          resize: none;"></textarea> </form>
+          <button class="button expanded" style="text-transform:uppercase;" id="send_order_id" onclick="sendAjaxForm('two', 'form_send', '/p={{production.alias}}/');">отправить</button>
    
     <button class="close-button" data-close arial-label="Close modal" type="button" ><span arial-hidden="true">&times;</span></button>
+
+
+
   </div>
 
   <div id="two" class="success callout" hidden="true" style="border-size:0 0 0 0px;margin:0px 0px 0px 0px;">
@@ -130,123 +162,50 @@
   </div>
 </div>
 
-<div class="reveal-overlay" id="reveal-overlay-id" style="display: none;" onclick="Hide2();"></div>
 
-{% load staticfiles %}
+
+
 
 
 <script>
-$('#call_modal_btn_id').click(function(){
-  $('#reveal-overlay-id').show();
-  $('#reveal-overlay-id').css('z-index','1005');
-  $('#myModal').show();
-  $('#myModal').css('z-index','1006');
-  $('#myModal').css('position','fixed');
-  $('#myModal').css('top','0px');
-  $('#myModal').css('left','0px');
-  $('#myModal').css('margin-left','30%');
-  $('#myModal').css('margin-right','30%');
-  $('#myModal').css('margin-top','10%');
+$( document ).ready(function() {
+    $('#call_modal_btn_id').click(function(){
+          $('#two').hide();
+          $('#one').show();
+          $('#fio_id').css('border','1px solid #cacaca');
+          $('#tel_id').css('border','1px solid #cacaca');
+    });
 });
-$('#reveal-overlay-id').click(function(){
-  $('#myModal').hide();
-  $('#reveal-overlay-id').hide();
-});
-$(document).ready(function(){ 
-var e = jQuery.Event( "$('#myModal').css('display','none')" );
+ 
+function sendAjaxForm(two, ajax_form, url) {
+  if (document.getElementById('form_send').checkValidity())
+  {
+    $.ajax({
+        url:     url, //url страницы (action_ajax_form.php)
+        type:     "POST", //метод отправки
+        dataType: "html", //формат данных
+        data: $("#"+ajax_form).serialize(),  // Сеарилизуем объект
+        success: function() { //Данные отправлены успешно
+          $('#two').show();
+          $('#one').hide();
+      },
+      error: function() { // Данные не отправлены
+            $('#two').html('<h4 align="middle">Ошибка. Данные не отправлены.</h4><button class="close-button" data-close arial-label="Close modal" type="button" ><span arial-hidden="true">&times;</span></button>');
+      }
+  });
+  } else {
+   if ($('#fio_id').val()===''){
+    $('#fio_id').css('border','solid red')
+   }
 
+   if ($('#tel_id').val()===''){
+    $('#tel_id').css('border','solid red')
+   }
 
-//Костыль
-/*var m = document.getElementById("content_id").innerHTML;
-var res =m.replace(/&lt;/gi,'<').replace(/&gt;/gi,'>');
-document.getElementById("content_id").innerHTML=res;*/
-//
-
-function Hide2(){
-  $('#myModal').hide();
-  $('#reveal-overlay-id').hide();
+  }
 }
 
-$('.close-button').click(function(){
-Hide2();
-  GoBack();
 
-    
-});
-
-  $('#send_order_id').click(function(){
-    if (($('.required').val() == '')||($('input + .required').val() == ''))
-    {
-      alert('Заполните поля со звёздочками*');
-    }
-    else
-    {
-
-
-    
-  $.ajax({
-          type:"POST",
-          url:"/p={{production.alias}}/",
-          data:{
-            'name_client':$('#fio_id').val(),
-            'tel':$('#tel_id').val(),
-            'comment':$('#comment_id').val(),
-            'alias':'{{production.alias}}',
-            'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val()
-          },
-          success:Success_resp(), 
-          dataType:'html'
-          });
-     };
-
-
-  });
-
-//success callout
-function Success_resp(){
-  //$('#myModal').css('display','none');
-  $('#two').css('display','block');
-  $('#myModal').css('padding','0px');
-  $('#one').css('display','none');
-  //$('#fio_id').val('');
-  //$('#tel_id').val('');
-
-};
-
-function GoBack(){
-  $('#two').css('display','none');
-  $('#one').css('display','block');
-  $('#myModal').css('padding','16px');
-};
-$(document).click(function(){
-  if($('#myModal').css('display')=='none'){
-      $('#fio_id').val('');
-      $('#tel_id').val('');
-      $('#comment_id').val('');
-      //GoBack();
-    }
-});
-
-
-
-  });
-
-  $(document).ready(function(){
-      $.ajax({
-          type:"POST",
-          url:"",
-          data:{
-            'views':'{{production.alias}}',
-            'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val()
-          },
-          //success:alert('+'),
-          dataType:'html'
-          });
-
-
-
-
-  });
 
 </script>
 

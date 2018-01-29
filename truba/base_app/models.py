@@ -7,13 +7,14 @@ from smtplib import SMTPRecipientsRefused
 
 import mptt
 from ckeditor.fields import RichTextField
-import simplejson as json
+
 from django.db import models
 # Create your models here.
 ###########################################################################################################
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
 
+from custom_page.models import base_setting
 from django_seo import models as seo_models
 from truba.settings import BASE_DIR, DEV_EMAIL, DEBUG
 
@@ -53,21 +54,11 @@ class Catalog(MPTTModel):
     prew_img.short_description = u'Изображение'
     prew_img.allow_tags = True
 
-
-
-
-
-
     class MPTTMeta:
         order_insertion_by = ['name']
 mptt.register(Catalog, order_insertion_by=['name'])
-
-
 #########################################################################################
 class Specifications(models.Model):
-
-
-
     prod = models.CharField(max_length=255, verbose_name='Продукция')
     destiny = models.CharField(max_length=255, verbose_name='Предназначение', default=u'Для (предназначение)')
     product_description = RichTextField(verbose_name='Описание продукции', blank=True, null=True)
@@ -109,8 +100,6 @@ class Production(models.Model):
     class Meta():
         verbose_name_plural = 'Продукция'
         verbose_name = 'Продукцию'
-
-
 
     def __unicode__(self):
         return '%s'%(self.name)
@@ -155,6 +144,7 @@ class Order(models.Model):
         g.sum_orders=len(c)
         g.save()
         super(Order, self).save()
+        # Send mail for clients and admin
         c=base_setting()
         try:
             b = smtplib.SMTP(c['smtp'], c['port'])
@@ -188,43 +178,9 @@ class Order(models.Model):
             b.quit()
         except SMTPRecipientsRefused:
             print "Сообщение не отправленно 'SMTPRecipientsRefused'"
+        except:
+            print "Сообщение не отправленно по иным причинам"
+        # End send mail
     prew_img.short_description = u'Изображение'
     prew_img.allow_tags = True
 
-def base_setting():
-    try:
-        f=open('%s/setting.json'%(BASE_DIR),'r')
-    except:
-        f = open('%s/setting.json' % (BASE_DIR), 'w')
-        f.close()
-    f = open('%s/setting.json' % (BASE_DIR), 'r')
-    set=f.read()
-    f.close()
-    if not set:
-        content={
-            'company': '',
-            'logo': '',
-            'tel': '',
-            'email': '',
-            'nation': '',
-            'region': '',
-            'city': '',
-            'street': '',
-            'home': '',
-            'office': '',
-            'seo_links': '',
-            'yan_x': '',
-            'yan_y': '',
-
-        }
-        content['smtp'] = ''
-        content['port'] = ''
-        content['email_from'] = ''
-        content['password'] = ''
-        content['email_to'] = ''
-        with open("setting.json", "w") as file:
-            json.dump(content, file)
-    else:
-        content=json.load(open('setting.json'))
-    content['dev_email'] = DEV_EMAIL
-    return content

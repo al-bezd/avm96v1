@@ -13,8 +13,8 @@ rep2='Как вы хотите что бы мы вам ответили? Есл�
 rep3='Благоарим ва за вопрос, наши специалисты ответят вам на вопрос через 15 минут '
 class ChatConsultant(models.Model):
     class Meta():
-        verbose_name_plural = 'Чат консультант'
-        verbose_name = 'Чат консультант'
+        verbose_name_plural = 'Бот консультант'
+        verbose_name = 'Бот консультант'
     name=models.CharField(max_length=60, verbose_name='ФИО Консультанта',unique=True)
     rang=models.CharField(verbose_name='Должность', default='дежурный менеджер', max_length=60)
     img=models.ImageField(verbose_name='Фото(54x54)', blank=True, null=True,height_field=54,width_field=54)

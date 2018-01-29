@@ -42,7 +42,9 @@ line-height: 1;
         	<div class="form-row">
                 <div>
                     <label class="required" for="logo_id">Логотип</label>
-            		<input type="file" name="logo" id="logo_id" class="vTextField"  value="{{logo}}">  
+            		<input type="text" name="logo" id="logo_id" class="vTextField" value="{{logo}}">
+                    <p>Для того что бы добавить логотип в свой проект необходимо разместить в папке "static/logo/" файл логотипа,
+                        <br> а так же вписать название этого файла в поле "Логотип"(см.выше)</p>
                 </div>
         	</div>            
         	<!--<div class="form-row">
@@ -141,8 +143,7 @@ line-height: 1;
             <div class="form-row">
                 <div>
                     <label class="required" for="seo_links_id">Ссылки(SEO)</label>
-                    <textarea class="vTextField" name="seo_links" id="seo_links_id" name="" id="" cols="30" rows="10">{{seo_links}}
-                    </textarea>
+                    <textarea class="vTextField" name="seo_links" id="seo_links_id" name="" id="" cols="30" rows="10">{{seo_links}}</textarea>
                 </div>
         	</div>
         </fieldset>

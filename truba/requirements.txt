@@ -1,7 +1,7 @@
 appdirs==1.4.3
 certifi==2017.4.17
 chardet==3.0.4
-Django==1.10
+Django==1.11.29
 django-admin-sortable2==0.6.10
 django-angular==0.8.4
 django-appconf==1.0.2

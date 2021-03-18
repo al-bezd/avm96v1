@@ -35,7 +35,7 @@ idna==2.5
 jsonfield==2.0.1
 olefile==0.44
 packaging==16.8
-Pillow==4.0.0
+Pillow==8.1.1
 pyparsing==2.2.0
 requests==2.18.1
 setupfiles==0.0.50

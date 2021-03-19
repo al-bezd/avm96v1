@@ -27,7 +27,7 @@ django-treebeard==4.1.0
 django-zurb-foundation==5.5.0
 djangocms-admin-style==1.2.6.2
 djangocms-cascade==0.12.0
-djangorestframework==3.6.2
+djangorestframework==3.11.2
 easy-thumbnails==2.3
 enum34==1.1.6
 freeze==1.0.10

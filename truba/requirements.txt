@@ -41,4 +41,4 @@ requests==2.18.1
 setupfiles==0.0.50
 six==1.10.0
 Unidecode==0.4.20
-urllib3==1.21.1
+urllib3==1.26.5
